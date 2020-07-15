@@ -1,0 +1,11 @@
+r20-marki-pbanic-ebaukovac/Software/.vs/
+Software/packages/
+Software/PI20-014 Apoteka/bin
+Software/PI20-014 Apoteka/obj
+Software/Analiza/bin
+Software/Analiza/obj
+Software/.vs
+Software/MailLib/bin
+Software/MailLib/obj
+*.suo
+*.vs

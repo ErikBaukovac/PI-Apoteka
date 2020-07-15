@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="07bbf1e4977d443987f498c0660d5434" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="PI20_014_DBModel.Apoteka" Width="1.5" PointX="7.5" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PI20_014_DBModel.Dobavljac" Width="1.5" PointX="12.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="PI20_014_DBModel.Dostupno" Width="1.5" PointX="15" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PI20_014_DBModel.Korisnik" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PI20_014_DBModel.Lijek" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PI20_014_DBModel.LoyaltyOpcije" Width="1.5" PointX="7.5" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PI20_014_DBModel.Narudzbenica" Width="1.5" PointX="9.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PI20_014_DBModel.Racun" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="PI20_014_DBModel.Rezervirao" Width="1.5" PointX="12.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PI20_014_DBModel.StavkeNarudzbenice" Width="1.5" PointX="15" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PI20_014_DBModel.StavkeRacuna" Width="1.5" PointX="7.5" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PI20_014_DBModel.Tvrtka" Width="1.5" PointX="5.25" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PI20_014_DBModel.Uloga" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PI20_014_DBModel.Zalihe" Width="1.5" PointX="9.75" PointY="14.375" IsExpanded="true" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_Apoteka_Tvrtka" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_Korisnik_Apoteka" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_Narudzbenica_Apoteka" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_Rezervirao_Apoteka" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_Zalihe_Apoteka" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_Dostupno_Dobavljac" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_StavkeNarudzbenice_Dobavljac" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_Dostupno_Lijek" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_Korisnik_LoyaltyOpcije" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_Korisnik_Uloga" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_Narudzbenica_Korisnik" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_Racun_Korisnik" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_Rezervirao_Korisnik" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_Tvrtka_Korisnik" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_Rezervirao_Lijek" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_StavkeNarudzbenice_Lijek" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_StavkeRacuna_Lijek" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_Zalihe_Lijek" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_LoyaltyOpcije_Tvrtka" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_StavkeNarudzbenice_Narudzbenica" ManuallyRouted="false" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_StavkeRacuna_Racun" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PI20_014_DBModel.Primka" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PI20_014_DBModel.StavkePrimke" Width="1.5" PointX="2.75" PointY="0.75" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_Primka_Apoteka" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_StavkePrimke_Dobavljac" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_StavkePrimke_Lijek" />
+        <AssociationConnector Association="PI20_014_DBModel.FK_StavkePrimke_Primka" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

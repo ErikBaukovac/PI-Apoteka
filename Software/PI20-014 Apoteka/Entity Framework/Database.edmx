@@ -1,0 +1,1393 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PI20_014_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Apoteka">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Adresa" Type="varchar" MaxLength="50" />
+          <Property Name="TelefonskiBroj" Type="varchar" MaxLength="20" />
+          <Property Name="Tvrtka" Type="int" Nullable="false" />
+          <Property Name="Naziv" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Dobavljac">
+          <Key>
+            <PropertyRef Name="OIB" />
+          </Key>
+          <Property Name="OIB" Type="int" Nullable="false" />
+          <Property Name="Naziv" Type="varchar" MaxLength="50" />
+          <Property Name="Adresa" Type="varchar" MaxLength="50" />
+          <Property Name="TelefonskiBroj" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Dostupno">
+          <Key>
+            <PropertyRef Name="ID_dobavljaca" />
+            <PropertyRef Name="ID_lijeka" />
+          </Key>
+          <Property Name="ID_dobavljaca" Type="int" Nullable="false" />
+          <Property Name="ID_lijeka" Type="int" Nullable="false" />
+          <Property Name="Kolicina" Type="int" />
+        </EntityType>
+        <EntityType Name="Korisnik">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KorisnickoIme" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Lozinka" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Uloga" Type="int" />
+          <Property Name="LoyaltyOpcije" Type="int" />
+          <Property Name="Apoteka" Type="int" />
+          <Property Name="Ime" Type="varchar" MaxLength="20" />
+          <Property Name="Prezime" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Lijek">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="varchar" MaxLength="50" />
+          <Property Name="Cijena" Type="float" />
+        </EntityType>
+        <EntityType Name="LoyaltyOpcije">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="varchar" MaxLength="20" />
+          <Property Name="Popust" Type="int" />
+          <Property Name="Tvrtka" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Narudzbenica">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_apoteke" Type="int" Nullable="false" />
+          <Property Name="ID_zaposlenika" Type="int" Nullable="false" />
+          <Property Name="Datum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Primka">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_apoteke" Type="int" Nullable="false" />
+          <Property Name="Datum" Type="date" />
+          <Property Name="ID_otpremnice" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Racun">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_prodavaca" Type="int" Nullable="false" />
+          <Property Name="Datum" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Rezervirao">
+          <Key>
+            <PropertyRef Name="ID_korisnika" />
+            <PropertyRef Name="ID_lijeka" />
+            <PropertyRef Name="ID_apoteke" />
+          </Key>
+          <Property Name="ID_korisnika" Type="int" Nullable="false" />
+          <Property Name="ID_lijeka" Type="int" Nullable="false" />
+          <Property Name="ID_apoteke" Type="int" Nullable="false" />
+          <Property Name="Kolicina" Type="int" />
+        </EntityType>
+        <EntityType Name="StavkeNarudzbenice">
+          <Key>
+            <PropertyRef Name="ID_dobavljaca" />
+            <PropertyRef Name="ID_lijeka" />
+            <PropertyRef Name="ID_narudzbenice" />
+          </Key>
+          <Property Name="ID_dobavljaca" Type="int" Nullable="false" />
+          <Property Name="ID_lijeka" Type="int" Nullable="false" />
+          <Property Name="Kolicina" Type="int" />
+          <Property Name="ID_narudzbenice" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StavkePrimke">
+          <Key>
+            <PropertyRef Name="ID_dobavljaca" />
+            <PropertyRef Name="ID_lijek" />
+            <PropertyRef Name="ID_primke" />
+          </Key>
+          <Property Name="ID_dobavljaca" Type="int" Nullable="false" />
+          <Property Name="ID_lijek" Type="int" Nullable="false" />
+          <Property Name="ID_primke" Type="int" Nullable="false" />
+          <Property Name="Kolicina" Type="int" />
+        </EntityType>
+        <EntityType Name="StavkeRacuna">
+          <Key>
+            <PropertyRef Name="ID_lijeka" />
+            <PropertyRef Name="ID_racuna" />
+          </Key>
+          <Property Name="ID_lijeka" Type="int" Nullable="false" />
+          <Property Name="ID_racuna" Type="int" Nullable="false" />
+          <Property Name="Kolicina" Type="int" />
+          <Property Name="Iznos" Type="float" />
+          <Property Name="PDV" Type="int" />
+        </EntityType>
+        <EntityType Name="Tvrtka">
+          <Key>
+            <PropertyRef Name="OIB" />
+          </Key>
+          <Property Name="OIB" Type="int" Nullable="false" />
+          <Property Name="Naziv" Type="varchar" MaxLength="50" />
+          <Property Name="Admin" Type="int" />
+        </EntityType>
+        <EntityType Name="Uloga">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Zalihe">
+          <Key>
+            <PropertyRef Name="ID_apoteke" />
+            <PropertyRef Name="ID_lijeka" />
+          </Key>
+          <Property Name="ID_apoteke" Type="int" Nullable="false" />
+          <Property Name="ID_lijeka" Type="int" Nullable="false" />
+          <Property Name="Kolicina" Type="int" />
+        </EntityType>
+        <Association Name="FK_Apoteka_Tvrtka">
+          <End Role="Tvrtka" Type="Self.Tvrtka" Multiplicity="1" />
+          <End Role="Apoteka" Type="Self.Apoteka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tvrtka">
+              <PropertyRef Name="OIB" />
+            </Principal>
+            <Dependent Role="Apoteka">
+              <PropertyRef Name="Tvrtka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dostupno_Dobavljac">
+          <End Role="Dobavljac" Type="Self.Dobavljac" Multiplicity="1" />
+          <End Role="Dostupno" Type="Self.Dostupno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dobavljac">
+              <PropertyRef Name="OIB" />
+            </Principal>
+            <Dependent Role="Dostupno">
+              <PropertyRef Name="ID_dobavljaca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dostupno_Lijek">
+          <End Role="Lijek" Type="Self.Lijek" Multiplicity="1" />
+          <End Role="Dostupno" Type="Self.Dostupno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lijek">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Dostupno">
+              <PropertyRef Name="ID_lijeka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Korisnik_Apoteka">
+          <End Role="Apoteka" Type="Self.Apoteka" Multiplicity="0..1" />
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apoteka">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Korisnik">
+              <PropertyRef Name="Apoteka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Korisnik_LoyaltyOpcije">
+          <End Role="LoyaltyOpcije" Type="Self.LoyaltyOpcije" Multiplicity="0..1" />
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoyaltyOpcije">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Korisnik">
+              <PropertyRef Name="LoyaltyOpcije" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Korisnik_Uloga">
+          <End Role="Uloga" Type="Self.Uloga" Multiplicity="0..1" />
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uloga">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Korisnik">
+              <PropertyRef Name="Uloga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoyaltyOpcije_Tvrtka">
+          <End Role="Tvrtka" Type="Self.Tvrtka" Multiplicity="1" />
+          <End Role="LoyaltyOpcije" Type="Self.LoyaltyOpcije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tvrtka">
+              <PropertyRef Name="OIB" />
+            </Principal>
+            <Dependent Role="LoyaltyOpcije">
+              <PropertyRef Name="Tvrtka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Narudzbenica_Apoteka">
+          <End Role="Apoteka" Type="Self.Apoteka" Multiplicity="1" />
+          <End Role="Narudzbenica" Type="Self.Narudzbenica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apoteka">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Narudzbenica">
+              <PropertyRef Name="ID_apoteke" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Narudzbenica_Korisnik">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+          <End Role="Narudzbenica" Type="Self.Narudzbenica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Narudzbenica">
+              <PropertyRef Name="ID_zaposlenika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Primka_Apoteka">
+          <End Role="Apoteka" Type="Self.Apoteka" Multiplicity="1" />
+          <End Role="Primka" Type="Self.Primka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apoteka">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Primka">
+              <PropertyRef Name="ID_apoteke" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Racun_Korisnik">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+          <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Racun">
+              <PropertyRef Name="ID_prodavaca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezervirao_Apoteka">
+          <End Role="Apoteka" Type="Self.Apoteka" Multiplicity="1" />
+          <End Role="Rezervirao" Type="Self.Rezervirao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apoteka">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rezervirao">
+              <PropertyRef Name="ID_apoteke" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezervirao_Korisnik">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+          <End Role="Rezervirao" Type="Self.Rezervirao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rezervirao">
+              <PropertyRef Name="ID_korisnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezervirao_Lijek">
+          <End Role="Lijek" Type="Self.Lijek" Multiplicity="1" />
+          <End Role="Rezervirao" Type="Self.Rezervirao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lijek">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rezervirao">
+              <PropertyRef Name="ID_lijeka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkeNarudzbenice_Dobavljac">
+          <End Role="Dobavljac" Type="Self.Dobavljac" Multiplicity="1" />
+          <End Role="StavkeNarudzbenice" Type="Self.StavkeNarudzbenice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dobavljac">
+              <PropertyRef Name="OIB" />
+            </Principal>
+            <Dependent Role="StavkeNarudzbenice">
+              <PropertyRef Name="ID_dobavljaca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkeNarudzbenice_Lijek">
+          <End Role="Lijek" Type="Self.Lijek" Multiplicity="1" />
+          <End Role="StavkeNarudzbenice" Type="Self.StavkeNarudzbenice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lijek">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StavkeNarudzbenice">
+              <PropertyRef Name="ID_lijeka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkeNarudzbenice_Narudzbenica">
+          <End Role="Narudzbenica" Type="Self.Narudzbenica" Multiplicity="1" />
+          <End Role="StavkeNarudzbenice" Type="Self.StavkeNarudzbenice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Narudzbenica">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StavkeNarudzbenice">
+              <PropertyRef Name="ID_narudzbenice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkePrimke_Dobavljac">
+          <End Role="Dobavljac" Type="Self.Dobavljac" Multiplicity="1" />
+          <End Role="StavkePrimke" Type="Self.StavkePrimke" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dobavljac">
+              <PropertyRef Name="OIB" />
+            </Principal>
+            <Dependent Role="StavkePrimke">
+              <PropertyRef Name="ID_dobavljaca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkePrimke_Lijek">
+          <End Role="Lijek" Type="Self.Lijek" Multiplicity="1" />
+          <End Role="StavkePrimke" Type="Self.StavkePrimke" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lijek">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StavkePrimke">
+              <PropertyRef Name="ID_lijek" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkePrimke_Primka">
+          <End Role="Primka" Type="Self.Primka" Multiplicity="1" />
+          <End Role="StavkePrimke" Type="Self.StavkePrimke" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Primka">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StavkePrimke">
+              <PropertyRef Name="ID_primke" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkeRacuna_Lijek">
+          <End Role="Lijek" Type="Self.Lijek" Multiplicity="1" />
+          <End Role="StavkeRacuna" Type="Self.StavkeRacuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lijek">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StavkeRacuna">
+              <PropertyRef Name="ID_lijeka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkeRacuna_Racun">
+          <End Role="Racun" Type="Self.Racun" Multiplicity="1" />
+          <End Role="StavkeRacuna" Type="Self.StavkeRacuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Racun">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StavkeRacuna">
+              <PropertyRef Name="ID_racuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tvrtka_Korisnik">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="0..1" />
+          <End Role="Tvrtka" Type="Self.Tvrtka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tvrtka">
+              <PropertyRef Name="Admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zalihe_Apoteka">
+          <End Role="Apoteka" Type="Self.Apoteka" Multiplicity="1" />
+          <End Role="Zalihe" Type="Self.Zalihe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apoteka">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Zalihe">
+              <PropertyRef Name="ID_apoteke" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zalihe_Lijek">
+          <End Role="Lijek" Type="Self.Lijek" Multiplicity="1" />
+          <End Role="Zalihe" Type="Self.Zalihe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lijek">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Zalihe">
+              <PropertyRef Name="ID_lijeka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PI20_014_DBModelStoreContainer">
+          <EntitySet Name="Apoteka" EntityType="Self.Apoteka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dobavljac" EntityType="Self.Dobavljac" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dostupno" EntityType="Self.Dostupno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Korisnik" EntityType="Self.Korisnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lijek" EntityType="Self.Lijek" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoyaltyOpcije" EntityType="Self.LoyaltyOpcije" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Narudzbenica" EntityType="Self.Narudzbenica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Primka" EntityType="Self.Primka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Racun" EntityType="Self.Racun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rezervirao" EntityType="Self.Rezervirao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StavkeNarudzbenice" EntityType="Self.StavkeNarudzbenice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StavkePrimke" EntityType="Self.StavkePrimke" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StavkeRacuna" EntityType="Self.StavkeRacuna" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tvrtka" EntityType="Self.Tvrtka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uloga" EntityType="Self.Uloga" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zalihe" EntityType="Self.Zalihe" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Apoteka_Tvrtka" Association="Self.FK_Apoteka_Tvrtka">
+            <End Role="Tvrtka" EntitySet="Tvrtka" />
+            <End Role="Apoteka" EntitySet="Apoteka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dostupno_Dobavljac" Association="Self.FK_Dostupno_Dobavljac">
+            <End Role="Dobavljac" EntitySet="Dobavljac" />
+            <End Role="Dostupno" EntitySet="Dostupno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dostupno_Lijek" Association="Self.FK_Dostupno_Lijek">
+            <End Role="Lijek" EntitySet="Lijek" />
+            <End Role="Dostupno" EntitySet="Dostupno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Korisnik_Apoteka" Association="Self.FK_Korisnik_Apoteka">
+            <End Role="Apoteka" EntitySet="Apoteka" />
+            <End Role="Korisnik" EntitySet="Korisnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Korisnik_LoyaltyOpcije" Association="Self.FK_Korisnik_LoyaltyOpcije">
+            <End Role="LoyaltyOpcije" EntitySet="LoyaltyOpcije" />
+            <End Role="Korisnik" EntitySet="Korisnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Korisnik_Uloga" Association="Self.FK_Korisnik_Uloga">
+            <End Role="Uloga" EntitySet="Uloga" />
+            <End Role="Korisnik" EntitySet="Korisnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoyaltyOpcije_Tvrtka" Association="Self.FK_LoyaltyOpcije_Tvrtka">
+            <End Role="Tvrtka" EntitySet="Tvrtka" />
+            <End Role="LoyaltyOpcije" EntitySet="LoyaltyOpcije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Narudzbenica_Apoteka" Association="Self.FK_Narudzbenica_Apoteka">
+            <End Role="Apoteka" EntitySet="Apoteka" />
+            <End Role="Narudzbenica" EntitySet="Narudzbenica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Narudzbenica_Korisnik" Association="Self.FK_Narudzbenica_Korisnik">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="Narudzbenica" EntitySet="Narudzbenica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Primka_Apoteka" Association="Self.FK_Primka_Apoteka">
+            <End Role="Apoteka" EntitySet="Apoteka" />
+            <End Role="Primka" EntitySet="Primka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Racun_Korisnik" Association="Self.FK_Racun_Korisnik">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="Racun" EntitySet="Racun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezervirao_Apoteka" Association="Self.FK_Rezervirao_Apoteka">
+            <End Role="Apoteka" EntitySet="Apoteka" />
+            <End Role="Rezervirao" EntitySet="Rezervirao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezervirao_Korisnik" Association="Self.FK_Rezervirao_Korisnik">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="Rezervirao" EntitySet="Rezervirao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezervirao_Lijek" Association="Self.FK_Rezervirao_Lijek">
+            <End Role="Lijek" EntitySet="Lijek" />
+            <End Role="Rezervirao" EntitySet="Rezervirao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkeNarudzbenice_Dobavljac" Association="Self.FK_StavkeNarudzbenice_Dobavljac">
+            <End Role="Dobavljac" EntitySet="Dobavljac" />
+            <End Role="StavkeNarudzbenice" EntitySet="StavkeNarudzbenice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkeNarudzbenice_Lijek" Association="Self.FK_StavkeNarudzbenice_Lijek">
+            <End Role="Lijek" EntitySet="Lijek" />
+            <End Role="StavkeNarudzbenice" EntitySet="StavkeNarudzbenice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkeNarudzbenice_Narudzbenica" Association="Self.FK_StavkeNarudzbenice_Narudzbenica">
+            <End Role="Narudzbenica" EntitySet="Narudzbenica" />
+            <End Role="StavkeNarudzbenice" EntitySet="StavkeNarudzbenice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkePrimke_Dobavljac" Association="Self.FK_StavkePrimke_Dobavljac">
+            <End Role="Dobavljac" EntitySet="Dobavljac" />
+            <End Role="StavkePrimke" EntitySet="StavkePrimke" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkePrimke_Lijek" Association="Self.FK_StavkePrimke_Lijek">
+            <End Role="Lijek" EntitySet="Lijek" />
+            <End Role="StavkePrimke" EntitySet="StavkePrimke" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkePrimke_Primka" Association="Self.FK_StavkePrimke_Primka">
+            <End Role="Primka" EntitySet="Primka" />
+            <End Role="StavkePrimke" EntitySet="StavkePrimke" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkeRacuna_Lijek" Association="Self.FK_StavkeRacuna_Lijek">
+            <End Role="Lijek" EntitySet="Lijek" />
+            <End Role="StavkeRacuna" EntitySet="StavkeRacuna" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkeRacuna_Racun" Association="Self.FK_StavkeRacuna_Racun">
+            <End Role="Racun" EntitySet="Racun" />
+            <End Role="StavkeRacuna" EntitySet="StavkeRacuna" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tvrtka_Korisnik" Association="Self.FK_Tvrtka_Korisnik">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="Tvrtka" EntitySet="Tvrtka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zalihe_Apoteka" Association="Self.FK_Zalihe_Apoteka">
+            <End Role="Apoteka" EntitySet="Apoteka" />
+            <End Role="Zalihe" EntitySet="Zalihe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zalihe_Lijek" Association="Self.FK_Zalihe_Lijek">
+            <End Role="Lijek" EntitySet="Lijek" />
+            <End Role="Zalihe" EntitySet="Zalihe" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PI20_014_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Apoteka">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonskiBroj" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Tvrtka" Type="Int32" Nullable="false" />
+          <Property Name="Naziv" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tvrtka1" Relationship="Self.FK_Apoteka_Tvrtka" FromRole="Apoteka" ToRole="Tvrtka" />
+          <NavigationProperty Name="Korisnik" Relationship="Self.FK_Korisnik_Apoteka" FromRole="Apoteka" ToRole="Korisnik" />
+          <NavigationProperty Name="Narudzbenica" Relationship="Self.FK_Narudzbenica_Apoteka" FromRole="Apoteka" ToRole="Narudzbenica" />
+          <NavigationProperty Name="Rezervirao" Relationship="Self.FK_Rezervirao_Apoteka" FromRole="Apoteka" ToRole="Rezervirao" />
+          <NavigationProperty Name="Zalihe" Relationship="Self.FK_Zalihe_Apoteka" FromRole="Apoteka" ToRole="Zalihe" />
+          <NavigationProperty Name="Primka" Relationship="PI20_014_DBModel.FK_Primka_Apoteka" FromRole="Apoteka" ToRole="Primka" />
+        </EntityType>
+        <EntityType Name="Dobavljac">
+          <Key>
+            <PropertyRef Name="OIB" />
+          </Key>
+          <Property Name="OIB" Type="Int32" Nullable="false" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonskiBroj" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Dostupno" Relationship="Self.FK_Dostupno_Dobavljac" FromRole="Dobavljac" ToRole="Dostupno" />
+          <NavigationProperty Name="StavkeNarudzbenice" Relationship="Self.FK_StavkeNarudzbenice_Dobavljac" FromRole="Dobavljac" ToRole="StavkeNarudzbenice" />
+          <NavigationProperty Name="StavkePrimke" Relationship="PI20_014_DBModel.FK_StavkePrimke_Dobavljac" FromRole="Dobavljac" ToRole="StavkePrimke" />
+        </EntityType>
+        <EntityType Name="Dostupno">
+          <Key>
+            <PropertyRef Name="ID_dobavljaca" />
+            <PropertyRef Name="ID_lijeka" />
+          </Key>
+          <Property Name="ID_dobavljaca" Type="Int32" Nullable="false" />
+          <Property Name="ID_lijeka" Type="Int32" Nullable="false" />
+          <Property Name="Kolicina" Type="Int32" />
+          <NavigationProperty Name="Dobavljac" Relationship="Self.FK_Dostupno_Dobavljac" FromRole="Dostupno" ToRole="Dobavljac" />
+          <NavigationProperty Name="Lijek" Relationship="Self.FK_Dostupno_Lijek" FromRole="Dostupno" ToRole="Lijek" />
+        </EntityType>
+        <EntityType Name="Korisnik">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KorisnickoIme" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lozinka" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Uloga" Type="Int32" />
+          <Property Name="LoyaltyOpcije" Type="Int32" />
+          <Property Name="Apoteka" Type="Int32" />
+          <NavigationProperty Name="Apoteka1" Relationship="Self.FK_Korisnik_Apoteka" FromRole="Korisnik" ToRole="Apoteka" />
+          <NavigationProperty Name="LoyaltyOpcije1" Relationship="Self.FK_Korisnik_LoyaltyOpcije" FromRole="Korisnik" ToRole="LoyaltyOpcije" />
+          <NavigationProperty Name="Uloga1" Relationship="Self.FK_Korisnik_Uloga" FromRole="Korisnik" ToRole="Uloga" />
+          <NavigationProperty Name="Narudzbenica" Relationship="Self.FK_Narudzbenica_Korisnik" FromRole="Korisnik" ToRole="Narudzbenica" />
+          <NavigationProperty Name="Racun" Relationship="Self.FK_Racun_Korisnik" FromRole="Korisnik" ToRole="Racun" />
+          <NavigationProperty Name="Rezervirao" Relationship="Self.FK_Rezervirao_Korisnik" FromRole="Korisnik" ToRole="Rezervirao" />
+          <NavigationProperty Name="Tvrtka" Relationship="Self.FK_Tvrtka_Korisnik" FromRole="Korisnik" ToRole="Tvrtka" />
+          <Property Name="Ime" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Prezime" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Lijek">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cijena" Type="Double" />
+          <NavigationProperty Name="Dostupno" Relationship="Self.FK_Dostupno_Lijek" FromRole="Lijek" ToRole="Dostupno" />
+          <NavigationProperty Name="Rezervirao" Relationship="Self.FK_Rezervirao_Lijek" FromRole="Lijek" ToRole="Rezervirao" />
+          <NavigationProperty Name="StavkeNarudzbenice" Relationship="Self.FK_StavkeNarudzbenice_Lijek" FromRole="Lijek" ToRole="StavkeNarudzbenice" />
+          <NavigationProperty Name="StavkeRacuna" Relationship="Self.FK_StavkeRacuna_Lijek" FromRole="Lijek" ToRole="StavkeRacuna" />
+          <NavigationProperty Name="Zalihe" Relationship="Self.FK_Zalihe_Lijek" FromRole="Lijek" ToRole="Zalihe" />
+          <NavigationProperty Name="StavkePrimke" Relationship="PI20_014_DBModel.FK_StavkePrimke_Lijek" FromRole="Lijek" ToRole="StavkePrimke" />
+        </EntityType>
+        <EntityType Name="LoyaltyOpcije">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Popust" Type="Int32" />
+          <Property Name="Tvrtka" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Korisnik" Relationship="Self.FK_Korisnik_LoyaltyOpcije" FromRole="LoyaltyOpcije" ToRole="Korisnik" />
+          <NavigationProperty Name="Tvrtka1" Relationship="Self.FK_LoyaltyOpcije_Tvrtka" FromRole="LoyaltyOpcije" ToRole="Tvrtka" />
+        </EntityType>
+        <EntityType Name="Narudzbenica">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID_apoteke" Type="Int32" Nullable="false" />
+          <Property Name="ID_zaposlenika" Type="Int32" Nullable="false" />
+          <Property Name="Datum" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Apoteka" Relationship="Self.FK_Narudzbenica_Apoteka" FromRole="Narudzbenica" ToRole="Apoteka" />
+          <NavigationProperty Name="Korisnik" Relationship="Self.FK_Narudzbenica_Korisnik" FromRole="Narudzbenica" ToRole="Korisnik" />
+          <NavigationProperty Name="StavkeNarudzbenice" Relationship="Self.FK_StavkeNarudzbenice_Narudzbenica" FromRole="Narudzbenica" ToRole="StavkeNarudzbenice" />
+        </EntityType>
+        <EntityType Name="Racun">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID_prodavaca" Type="Int32" Nullable="false" />
+          <Property Name="Datum" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Korisnik" Relationship="Self.FK_Racun_Korisnik" FromRole="Racun" ToRole="Korisnik" />
+          <NavigationProperty Name="StavkeRacuna" Relationship="Self.FK_StavkeRacuna_Racun" FromRole="Racun" ToRole="StavkeRacuna" />
+        </EntityType>
+        <EntityType Name="Rezervirao">
+          <Key>
+            <PropertyRef Name="ID_korisnika" />
+            <PropertyRef Name="ID_lijeka" />
+            <PropertyRef Name="ID_apoteke" />
+          </Key>
+          <Property Name="ID_korisnika" Type="Int32" Nullable="false" />
+          <Property Name="ID_lijeka" Type="Int32" Nullable="false" />
+          <Property Name="ID_apoteke" Type="Int32" Nullable="false" />
+          <Property Name="Kolicina" Type="Int32" />
+          <NavigationProperty Name="Apoteka" Relationship="Self.FK_Rezervirao_Apoteka" FromRole="Rezervirao" ToRole="Apoteka" />
+          <NavigationProperty Name="Korisnik" Relationship="Self.FK_Rezervirao_Korisnik" FromRole="Rezervirao" ToRole="Korisnik" />
+          <NavigationProperty Name="Lijek" Relationship="Self.FK_Rezervirao_Lijek" FromRole="Rezervirao" ToRole="Lijek" />
+        </EntityType>
+        <EntityType Name="StavkeNarudzbenice">
+          <Key>
+            <PropertyRef Name="ID_dobavljaca" />
+            <PropertyRef Name="ID_lijeka" />
+            <PropertyRef Name="ID_narudzbenice" />
+          </Key>
+          <Property Name="ID_dobavljaca" Type="Int32" Nullable="false" />
+          <Property Name="ID_lijeka" Type="Int32" Nullable="false" />
+          <Property Name="Kolicina" Type="Int32" />
+          <Property Name="ID_narudzbenice" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dobavljac" Relationship="Self.FK_StavkeNarudzbenice_Dobavljac" FromRole="StavkeNarudzbenice" ToRole="Dobavljac" />
+          <NavigationProperty Name="Lijek" Relationship="Self.FK_StavkeNarudzbenice_Lijek" FromRole="StavkeNarudzbenice" ToRole="Lijek" />
+          <NavigationProperty Name="Narudzbenica" Relationship="Self.FK_StavkeNarudzbenice_Narudzbenica" FromRole="StavkeNarudzbenice" ToRole="Narudzbenica" />
+        </EntityType>
+        <EntityType Name="StavkeRacuna">
+          <Key>
+            <PropertyRef Name="ID_lijeka" />
+            <PropertyRef Name="ID_racuna" />
+          </Key>
+          <Property Name="ID_lijeka" Type="Int32" Nullable="false" />
+          <Property Name="ID_racuna" Type="Int32" Nullable="false" />
+          <Property Name="Kolicina" Type="Int32" />
+          <Property Name="Iznos" Type="Double" />
+          <Property Name="PDV" Type="Int32" />
+          <NavigationProperty Name="Lijek" Relationship="Self.FK_StavkeRacuna_Lijek" FromRole="StavkeRacuna" ToRole="Lijek" />
+          <NavigationProperty Name="Racun" Relationship="Self.FK_StavkeRacuna_Racun" FromRole="StavkeRacuna" ToRole="Racun" />
+        </EntityType>
+        <EntityType Name="Tvrtka">
+          <Key>
+            <PropertyRef Name="OIB" />
+          </Key>
+          <Property Name="OIB" Type="Int32" Nullable="false" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Admin" Type="Int32" />
+          <NavigationProperty Name="Apoteka" Relationship="Self.FK_Apoteka_Tvrtka" FromRole="Tvrtka" ToRole="Apoteka" />
+          <NavigationProperty Name="Korisnik" Relationship="Self.FK_Tvrtka_Korisnik" FromRole="Tvrtka" ToRole="Korisnik" />
+          <NavigationProperty Name="LoyaltyOpcije" Relationship="Self.FK_LoyaltyOpcije_Tvrtka" FromRole="Tvrtka" ToRole="LoyaltyOpcije" />
+        </EntityType>
+        <EntityType Name="Uloga">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Korisnik" Relationship="Self.FK_Korisnik_Uloga" FromRole="Uloga" ToRole="Korisnik" />
+        </EntityType>
+        <EntityType Name="Zalihe">
+          <Key>
+            <PropertyRef Name="ID_apoteke" />
+            <PropertyRef Name="ID_lijeka" />
+          </Key>
+          <Property Name="ID_apoteke" Type="Int32" Nullable="false" />
+          <Property Name="ID_lijeka" Type="Int32" Nullable="false" />
+          <Property Name="Kolicina" Type="Int32" />
+          <NavigationProperty Name="Apoteka" Relationship="Self.FK_Zalihe_Apoteka" FromRole="Zalihe" ToRole="Apoteka" />
+          <NavigationProperty Name="Lijek" Relationship="Self.FK_Zalihe_Lijek" FromRole="Zalihe" ToRole="Lijek" />
+        </EntityType>
+        <Association Name="FK_Apoteka_Tvrtka">
+          <End Role="Tvrtka" Type="Self.Tvrtka" Multiplicity="1" />
+          <End Role="Apoteka" Type="Self.Apoteka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tvrtka">
+              <PropertyRef Name="OIB" />
+            </Principal>
+            <Dependent Role="Apoteka">
+              <PropertyRef Name="Tvrtka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Korisnik_Apoteka">
+          <End Role="Apoteka" Type="Self.Apoteka" Multiplicity="0..1" />
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apoteka">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Korisnik">
+              <PropertyRef Name="Apoteka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Narudzbenica_Apoteka">
+          <End Role="Apoteka" Type="Self.Apoteka" Multiplicity="1" />
+          <End Role="Narudzbenica" Type="Self.Narudzbenica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apoteka">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Narudzbenica">
+              <PropertyRef Name="ID_apoteke" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezervirao_Apoteka">
+          <End Role="Apoteka" Type="Self.Apoteka" Multiplicity="1" />
+          <End Role="Rezervirao" Type="Self.Rezervirao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apoteka">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rezervirao">
+              <PropertyRef Name="ID_apoteke" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zalihe_Apoteka">
+          <End Role="Apoteka" Type="Self.Apoteka" Multiplicity="1" />
+          <End Role="Zalihe" Type="Self.Zalihe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apoteka">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Zalihe">
+              <PropertyRef Name="ID_apoteke" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dostupno_Dobavljac">
+          <End Role="Dobavljac" Type="Self.Dobavljac" Multiplicity="1" />
+          <End Role="Dostupno" Type="Self.Dostupno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dobavljac">
+              <PropertyRef Name="OIB" />
+            </Principal>
+            <Dependent Role="Dostupno">
+              <PropertyRef Name="ID_dobavljaca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkeNarudzbenice_Dobavljac">
+          <End Role="Dobavljac" Type="Self.Dobavljac" Multiplicity="1" />
+          <End Role="StavkeNarudzbenice" Type="Self.StavkeNarudzbenice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dobavljac">
+              <PropertyRef Name="OIB" />
+            </Principal>
+            <Dependent Role="StavkeNarudzbenice">
+              <PropertyRef Name="ID_dobavljaca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dostupno_Lijek">
+          <End Role="Lijek" Type="Self.Lijek" Multiplicity="1" />
+          <End Role="Dostupno" Type="Self.Dostupno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lijek">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Dostupno">
+              <PropertyRef Name="ID_lijeka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Korisnik_LoyaltyOpcije">
+          <End Role="LoyaltyOpcije" Type="Self.LoyaltyOpcije" Multiplicity="0..1" />
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoyaltyOpcije">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Korisnik">
+              <PropertyRef Name="LoyaltyOpcije" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Korisnik_Uloga">
+          <End Role="Uloga" Type="Self.Uloga" Multiplicity="0..1" />
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uloga">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Korisnik">
+              <PropertyRef Name="Uloga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Narudzbenica_Korisnik">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+          <End Role="Narudzbenica" Type="Self.Narudzbenica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Narudzbenica">
+              <PropertyRef Name="ID_zaposlenika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Racun_Korisnik">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+          <End Role="Racun" Type="Self.Racun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Racun">
+              <PropertyRef Name="ID_prodavaca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezervirao_Korisnik">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+          <End Role="Rezervirao" Type="Self.Rezervirao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rezervirao">
+              <PropertyRef Name="ID_korisnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tvrtka_Korisnik">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="0..1" />
+          <End Role="Tvrtka" Type="Self.Tvrtka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tvrtka">
+              <PropertyRef Name="Admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezervirao_Lijek">
+          <End Role="Lijek" Type="Self.Lijek" Multiplicity="1" />
+          <End Role="Rezervirao" Type="Self.Rezervirao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lijek">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rezervirao">
+              <PropertyRef Name="ID_lijeka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkeNarudzbenice_Lijek">
+          <End Role="Lijek" Type="Self.Lijek" Multiplicity="1" />
+          <End Role="StavkeNarudzbenice" Type="Self.StavkeNarudzbenice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lijek">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StavkeNarudzbenice">
+              <PropertyRef Name="ID_lijeka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkeRacuna_Lijek">
+          <End Role="Lijek" Type="Self.Lijek" Multiplicity="1" />
+          <End Role="StavkeRacuna" Type="Self.StavkeRacuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lijek">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StavkeRacuna">
+              <PropertyRef Name="ID_lijeka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zalihe_Lijek">
+          <End Role="Lijek" Type="Self.Lijek" Multiplicity="1" />
+          <End Role="Zalihe" Type="Self.Zalihe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lijek">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Zalihe">
+              <PropertyRef Name="ID_lijeka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoyaltyOpcije_Tvrtka">
+          <End Role="Tvrtka" Type="Self.Tvrtka" Multiplicity="1" />
+          <End Role="LoyaltyOpcije" Type="Self.LoyaltyOpcije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tvrtka">
+              <PropertyRef Name="OIB" />
+            </Principal>
+            <Dependent Role="LoyaltyOpcije">
+              <PropertyRef Name="Tvrtka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkeNarudzbenice_Narudzbenica">
+          <End Role="Narudzbenica" Type="Self.Narudzbenica" Multiplicity="1" />
+          <End Role="StavkeNarudzbenice" Type="Self.StavkeNarudzbenice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Narudzbenica">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StavkeNarudzbenice">
+              <PropertyRef Name="ID_narudzbenice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkeRacuna_Racun">
+          <End Role="Racun" Type="Self.Racun" Multiplicity="1" />
+          <End Role="StavkeRacuna" Type="Self.StavkeRacuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Racun">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StavkeRacuna">
+              <PropertyRef Name="ID_racuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PI20_014_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Apoteka" EntityType="Self.Apoteka" />
+          <EntitySet Name="Dobavljac" EntityType="Self.Dobavljac" />
+          <EntitySet Name="Dostupno" EntityType="Self.Dostupno" />
+          <EntitySet Name="Korisnik" EntityType="Self.Korisnik" />
+          <EntitySet Name="Lijek" EntityType="Self.Lijek" />
+          <EntitySet Name="LoyaltyOpcije" EntityType="Self.LoyaltyOpcije" />
+          <EntitySet Name="Narudzbenica" EntityType="Self.Narudzbenica" />
+          <EntitySet Name="Racun" EntityType="Self.Racun" />
+          <EntitySet Name="Rezervirao" EntityType="Self.Rezervirao" />
+          <EntitySet Name="StavkeNarudzbenice" EntityType="Self.StavkeNarudzbenice" />
+          <EntitySet Name="StavkeRacuna" EntityType="Self.StavkeRacuna" />
+          <EntitySet Name="Tvrtka" EntityType="Self.Tvrtka" />
+          <EntitySet Name="Uloga" EntityType="Self.Uloga" />
+          <EntitySet Name="Zalihe" EntityType="Self.Zalihe" />
+          <AssociationSet Name="FK_Apoteka_Tvrtka" Association="Self.FK_Apoteka_Tvrtka">
+            <End Role="Tvrtka" EntitySet="Tvrtka" />
+            <End Role="Apoteka" EntitySet="Apoteka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Korisnik_Apoteka" Association="Self.FK_Korisnik_Apoteka">
+            <End Role="Apoteka" EntitySet="Apoteka" />
+            <End Role="Korisnik" EntitySet="Korisnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Narudzbenica_Apoteka" Association="Self.FK_Narudzbenica_Apoteka">
+            <End Role="Apoteka" EntitySet="Apoteka" />
+            <End Role="Narudzbenica" EntitySet="Narudzbenica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezervirao_Apoteka" Association="Self.FK_Rezervirao_Apoteka">
+            <End Role="Apoteka" EntitySet="Apoteka" />
+            <End Role="Rezervirao" EntitySet="Rezervirao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zalihe_Apoteka" Association="Self.FK_Zalihe_Apoteka">
+            <End Role="Apoteka" EntitySet="Apoteka" />
+            <End Role="Zalihe" EntitySet="Zalihe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dostupno_Dobavljac" Association="Self.FK_Dostupno_Dobavljac">
+            <End Role="Dobavljac" EntitySet="Dobavljac" />
+            <End Role="Dostupno" EntitySet="Dostupno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkeNarudzbenice_Dobavljac" Association="Self.FK_StavkeNarudzbenice_Dobavljac">
+            <End Role="Dobavljac" EntitySet="Dobavljac" />
+            <End Role="StavkeNarudzbenice" EntitySet="StavkeNarudzbenice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dostupno_Lijek" Association="Self.FK_Dostupno_Lijek">
+            <End Role="Lijek" EntitySet="Lijek" />
+            <End Role="Dostupno" EntitySet="Dostupno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Korisnik_LoyaltyOpcije" Association="Self.FK_Korisnik_LoyaltyOpcije">
+            <End Role="LoyaltyOpcije" EntitySet="LoyaltyOpcije" />
+            <End Role="Korisnik" EntitySet="Korisnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Korisnik_Uloga" Association="Self.FK_Korisnik_Uloga">
+            <End Role="Uloga" EntitySet="Uloga" />
+            <End Role="Korisnik" EntitySet="Korisnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Narudzbenica_Korisnik" Association="Self.FK_Narudzbenica_Korisnik">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="Narudzbenica" EntitySet="Narudzbenica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Racun_Korisnik" Association="Self.FK_Racun_Korisnik">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="Racun" EntitySet="Racun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezervirao_Korisnik" Association="Self.FK_Rezervirao_Korisnik">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="Rezervirao" EntitySet="Rezervirao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tvrtka_Korisnik" Association="Self.FK_Tvrtka_Korisnik">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="Tvrtka" EntitySet="Tvrtka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezervirao_Lijek" Association="Self.FK_Rezervirao_Lijek">
+            <End Role="Lijek" EntitySet="Lijek" />
+            <End Role="Rezervirao" EntitySet="Rezervirao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkeNarudzbenice_Lijek" Association="Self.FK_StavkeNarudzbenice_Lijek">
+            <End Role="Lijek" EntitySet="Lijek" />
+            <End Role="StavkeNarudzbenice" EntitySet="StavkeNarudzbenice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkeRacuna_Lijek" Association="Self.FK_StavkeRacuna_Lijek">
+            <End Role="Lijek" EntitySet="Lijek" />
+            <End Role="StavkeRacuna" EntitySet="StavkeRacuna" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zalihe_Lijek" Association="Self.FK_Zalihe_Lijek">
+            <End Role="Lijek" EntitySet="Lijek" />
+            <End Role="Zalihe" EntitySet="Zalihe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoyaltyOpcije_Tvrtka" Association="Self.FK_LoyaltyOpcije_Tvrtka">
+            <End Role="Tvrtka" EntitySet="Tvrtka" />
+            <End Role="LoyaltyOpcije" EntitySet="LoyaltyOpcije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkeNarudzbenice_Narudzbenica" Association="Self.FK_StavkeNarudzbenice_Narudzbenica">
+            <End Role="Narudzbenica" EntitySet="Narudzbenica" />
+            <End Role="StavkeNarudzbenice" EntitySet="StavkeNarudzbenice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkeRacuna_Racun" Association="Self.FK_StavkeRacuna_Racun">
+            <End Role="Racun" EntitySet="Racun" />
+            <End Role="StavkeRacuna" EntitySet="StavkeRacuna" />
+          </AssociationSet>
+          <EntitySet Name="Primka" EntityType="PI20_014_DBModel.Primka" />
+          <EntitySet Name="StavkePrimke" EntityType="PI20_014_DBModel.StavkePrimke" />
+          <AssociationSet Name="FK_Primka_Apoteka" Association="PI20_014_DBModel.FK_Primka_Apoteka">
+            <End Role="Apoteka" EntitySet="Apoteka" />
+            <End Role="Primka" EntitySet="Primka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkePrimke_Dobavljac" Association="PI20_014_DBModel.FK_StavkePrimke_Dobavljac">
+            <End Role="Dobavljac" EntitySet="Dobavljac" />
+            <End Role="StavkePrimke" EntitySet="StavkePrimke" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkePrimke_Lijek" Association="PI20_014_DBModel.FK_StavkePrimke_Lijek">
+            <End Role="Lijek" EntitySet="Lijek" />
+            <End Role="StavkePrimke" EntitySet="StavkePrimke" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkePrimke_Primka" Association="PI20_014_DBModel.FK_StavkePrimke_Primka">
+            <End Role="Primka" EntitySet="Primka" />
+            <End Role="StavkePrimke" EntitySet="StavkePrimke" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Primka">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_apoteke" Type="Int32" Nullable="false" />
+          <Property Name="Datum" Type="DateTime" Precision="0" />
+          <Property Name="ID_otpremnice" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Apoteka" Relationship="PI20_014_DBModel.FK_Primka_Apoteka" FromRole="Primka" ToRole="Apoteka" />
+          <NavigationProperty Name="StavkePrimke" Relationship="PI20_014_DBModel.FK_StavkePrimke_Primka" FromRole="Primka" ToRole="StavkePrimke" />
+        </EntityType>
+        <EntityType Name="StavkePrimke">
+          <Key>
+            <PropertyRef Name="ID_dobavljaca" />
+            <PropertyRef Name="ID_lijek" />
+            <PropertyRef Name="ID_primke" />
+          </Key>
+          <Property Name="ID_dobavljaca" Type="Int32" Nullable="false" />
+          <Property Name="ID_lijek" Type="Int32" Nullable="false" />
+          <Property Name="ID_primke" Type="Int32" Nullable="false" />
+          <Property Name="Kolicina" Type="Int32" />
+          <NavigationProperty Name="Dobavljac" Relationship="PI20_014_DBModel.FK_StavkePrimke_Dobavljac" FromRole="StavkePrimke" ToRole="Dobavljac" />
+          <NavigationProperty Name="Lijek" Relationship="PI20_014_DBModel.FK_StavkePrimke_Lijek" FromRole="StavkePrimke" ToRole="Lijek" />
+          <NavigationProperty Name="Primka" Relationship="PI20_014_DBModel.FK_StavkePrimke_Primka" FromRole="StavkePrimke" ToRole="Primka" />
+        </EntityType>
+        <Association Name="FK_Primka_Apoteka">
+          <End Type="PI20_014_DBModel.Apoteka" Role="Apoteka" Multiplicity="1" />
+          <End Type="PI20_014_DBModel.Primka" Role="Primka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apoteka">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Primka">
+              <PropertyRef Name="ID_apoteke" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkePrimke_Dobavljac">
+          <End Type="PI20_014_DBModel.Dobavljac" Role="Dobavljac" Multiplicity="1" />
+          <End Type="PI20_014_DBModel.StavkePrimke" Role="StavkePrimke" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dobavljac">
+              <PropertyRef Name="OIB" />
+            </Principal>
+            <Dependent Role="StavkePrimke">
+              <PropertyRef Name="ID_dobavljaca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkePrimke_Lijek">
+          <End Type="PI20_014_DBModel.Lijek" Role="Lijek" Multiplicity="1" />
+          <End Type="PI20_014_DBModel.StavkePrimke" Role="StavkePrimke" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lijek">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StavkePrimke">
+              <PropertyRef Name="ID_lijek" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkePrimke_Primka">
+          <End Type="PI20_014_DBModel.Primka" Role="Primka" Multiplicity="1" />
+          <End Type="PI20_014_DBModel.StavkePrimke" Role="StavkePrimke" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Primka">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StavkePrimke">
+              <PropertyRef Name="ID_primke" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PI20_014_DBModelStoreContainer" CdmEntityContainer="PI20_014_DBEntities">
+          <EntitySetMapping Name="Apoteka">
+            <EntityTypeMapping TypeName="PI20_014_DBModel.Apoteka">
+              <MappingFragment StoreEntitySet="Apoteka">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="TelefonskiBroj" ColumnName="TelefonskiBroj" />
+                <ScalarProperty Name="Tvrtka" ColumnName="Tvrtka" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dobavljac">
+            <EntityTypeMapping TypeName="PI20_014_DBModel.Dobavljac">
+              <MappingFragment StoreEntitySet="Dobavljac">
+                <ScalarProperty Name="OIB" ColumnName="OIB" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="TelefonskiBroj" ColumnName="TelefonskiBroj" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dostupno">
+            <EntityTypeMapping TypeName="PI20_014_DBModel.Dostupno">
+              <MappingFragment StoreEntitySet="Dostupno">
+                <ScalarProperty Name="ID_dobavljaca" ColumnName="ID_dobavljaca" />
+                <ScalarProperty Name="ID_lijeka" ColumnName="ID_lijeka" />
+                <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Korisnik">
+            <EntityTypeMapping TypeName="PI20_014_DBModel.Korisnik">
+              <MappingFragment StoreEntitySet="Korisnik">
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KorisnickoIme" ColumnName="KorisnickoIme" />
+                <ScalarProperty Name="Lozinka" ColumnName="Lozinka" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Uloga" ColumnName="Uloga" />
+                <ScalarProperty Name="LoyaltyOpcije" ColumnName="LoyaltyOpcije" />
+                <ScalarProperty Name="Apoteka" ColumnName="Apoteka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lijek">
+            <EntityTypeMapping TypeName="PI20_014_DBModel.Lijek">
+              <MappingFragment StoreEntitySet="Lijek">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoyaltyOpcije">
+            <EntityTypeMapping TypeName="PI20_014_DBModel.LoyaltyOpcije">
+              <MappingFragment StoreEntitySet="LoyaltyOpcije">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Popust" ColumnName="Popust" />
+                <ScalarProperty Name="Tvrtka" ColumnName="Tvrtka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Narudzbenica">
+            <EntityTypeMapping TypeName="PI20_014_DBModel.Narudzbenica">
+              <MappingFragment StoreEntitySet="Narudzbenica">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_apoteke" ColumnName="ID_apoteke" />
+                <ScalarProperty Name="ID_zaposlenika" ColumnName="ID_zaposlenika" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Racun">
+            <EntityTypeMapping TypeName="PI20_014_DBModel.Racun">
+              <MappingFragment StoreEntitySet="Racun">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_prodavaca" ColumnName="ID_prodavaca" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rezervirao">
+            <EntityTypeMapping TypeName="PI20_014_DBModel.Rezervirao">
+              <MappingFragment StoreEntitySet="Rezervirao">
+                <ScalarProperty Name="ID_korisnika" ColumnName="ID_korisnika" />
+                <ScalarProperty Name="ID_lijeka" ColumnName="ID_lijeka" />
+                <ScalarProperty Name="ID_apoteke" ColumnName="ID_apoteke" />
+                <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StavkeNarudzbenice">
+            <EntityTypeMapping TypeName="PI20_014_DBModel.StavkeNarudzbenice">
+              <MappingFragment StoreEntitySet="StavkeNarudzbenice">
+                <ScalarProperty Name="ID_dobavljaca" ColumnName="ID_dobavljaca" />
+                <ScalarProperty Name="ID_lijeka" ColumnName="ID_lijeka" />
+                <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+                <ScalarProperty Name="ID_narudzbenice" ColumnName="ID_narudzbenice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StavkeRacuna">
+            <EntityTypeMapping TypeName="PI20_014_DBModel.StavkeRacuna">
+              <MappingFragment StoreEntitySet="StavkeRacuna">
+                <ScalarProperty Name="ID_lijeka" ColumnName="ID_lijeka" />
+                <ScalarProperty Name="ID_racuna" ColumnName="ID_racuna" />
+                <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+                <ScalarProperty Name="Iznos" ColumnName="Iznos" />
+                <ScalarProperty Name="PDV" ColumnName="PDV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tvrtka">
+            <EntityTypeMapping TypeName="PI20_014_DBModel.Tvrtka">
+              <MappingFragment StoreEntitySet="Tvrtka">
+                <ScalarProperty Name="OIB" ColumnName="OIB" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uloga">
+            <EntityTypeMapping TypeName="PI20_014_DBModel.Uloga">
+              <MappingFragment StoreEntitySet="Uloga">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zalihe">
+            <EntityTypeMapping TypeName="PI20_014_DBModel.Zalihe">
+              <MappingFragment StoreEntitySet="Zalihe">
+                <ScalarProperty Name="ID_apoteke" ColumnName="ID_apoteke" />
+                <ScalarProperty Name="ID_lijeka" ColumnName="ID_lijeka" />
+                <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Primka">
+            <EntityTypeMapping TypeName="PI20_014_DBModel.Primka">
+              <MappingFragment StoreEntitySet="Primka">
+                <ScalarProperty Name="ID_otpremnice" ColumnName="ID_otpremnice" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="ID_apoteke" ColumnName="ID_apoteke" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StavkePrimke">
+            <EntityTypeMapping TypeName="PI20_014_DBModel.StavkePrimke">
+              <MappingFragment StoreEntitySet="StavkePrimke">
+                <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+                <ScalarProperty Name="ID_primke" ColumnName="ID_primke" />
+                <ScalarProperty Name="ID_lijek" ColumnName="ID_lijek" />
+                <ScalarProperty Name="ID_dobavljaca" ColumnName="ID_dobavljaca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

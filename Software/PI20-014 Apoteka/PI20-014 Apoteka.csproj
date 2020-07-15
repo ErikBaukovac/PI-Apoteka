@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7E934D09-0636-4D9E-B227-8C965F120DAB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PI20_014_Apoteka</RootNamespace>
+    <AssemblyName>PI20-014 Apoteka</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.5\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MailKit, Version=2.7.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailKit.2.7.0\lib\net47\MailKit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeKit, Version=2.8.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKit.2.8.0\lib\net47\MimeKit.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dodatne klase\Dobavljac.code.cs" />
+    <Compile Include="Dodatne klase\Korisnik.code.cs" />
+    <Compile Include="Dodatne klase\LoyaltyOpcije.code.cs" />
+    <Compile Include="Dodatne klase\ProvjeraUnosa.cs" />
+    <Compile Include="Entity Framework\Apoteka.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\Database.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\Database.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\Database.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\Dobavljac.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\Dostupno.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\Korisnik.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\Lijek.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\LoyaltyOpcije.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\Narudzbenica.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\Primka.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\Racun.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\Rezervirao.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\StavkeNarudzbenice.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\StavkePrimke.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\StavkeRacuna.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\Tvrtka.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\Uloga.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\Zalihe.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AzuriranjeDobavljaca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AzuriranjeDobavljaca.Designer.cs">
+      <DependentUpon>AzuriranjeDobavljaca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AzuriranjeLijekova.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AzuriranjeLijekova.Designer.cs">
+      <DependentUpon>AzuriranjeLijekova.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AzuriranjePodataka.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AzuriranjePodataka.Designer.cs">
+      <DependentUpon>AzuriranjePodataka.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AzuriranjeZaposlenika.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AzuriranjeZaposlenika.Designer.cs">
+      <DependentUpon>AzuriranjeZaposlenika.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AzuriranjeBrisanjeLoyaltyKarticeFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AzuriranjeBrisanjeLoyaltyKarticeFrm.Designer.cs">
+      <DependentUpon>AzuriranjeBrisanjeLoyaltyKarticeFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AzuriranjeBrisanjeLoyaltyOpcijeFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AzuriranjeBrisanjeLoyaltyOpcijeFrm.Designer.cs">
+      <DependentUpon>AzuriranjeBrisanjeLoyaltyOpcijeFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BrisanjeDobavljaca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BrisanjeDobavljaca.Designer.cs">
+      <DependentUpon>BrisanjeDobavljaca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BrisanjeLijekova.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BrisanjeLijekova.Designer.cs">
+      <DependentUpon>BrisanjeLijekova.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BrisanjeZaposlenika.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BrisanjeZaposlenika.Designer.cs">
+      <DependentUpon>BrisanjeZaposlenika.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IzradaPrimke.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IzradaPrimke.Designer.cs">
+      <DependentUpon>IzradaPrimke.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MailSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MailSettings.Designer.cs">
+      <DependentUpon>MailSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PregledDobavljaca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PregledDobavljaca.Designer.cs">
+      <DependentUpon>PregledDobavljaca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IzdavanjeRacuna.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IzdavanjeRacuna.Designer.cs">
+      <DependentUpon>IzdavanjeRacuna.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IzradaLoyaltyKartice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IzradaLoyaltyKartice.Designer.cs">
+      <DependentUpon>IzradaLoyaltyKartice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IzradaLoyaltyOpcije.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IzradaLoyaltyOpcije.Designer.cs">
+      <DependentUpon>IzradaLoyaltyOpcije.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\KreiranjeApoteke.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\KreiranjeApoteke.Designer.cs">
+      <DependentUpon>KreiranjeApoteke.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainAdministratorFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainAdministratorFrm.Designer.cs">
+      <DependentUpon>MainAdministratorFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainKorisnikFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainKorisnikFrm.Designer.cs">
+      <DependentUpon>MainKorisnikFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainZaposlenikFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainZaposlenikFrm.Designer.cs">
+      <DependentUpon>MainZaposlenikFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NarucivanjeLijekova.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NarucivanjeLijekova.Designer.cs">
+      <DependentUpon>NarucivanjeLijekova.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PregledIzvjesca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PregledIzvjesca.Designer.cs">
+      <DependentUpon>PregledIzvjesca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PregledKorisnika.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PregledKorisnika.Designer.cs">
+      <DependentUpon>PregledKorisnika.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PregledLoyaltyKarticaFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PregledLoyaltyKarticaFrm.Designer.cs">
+      <DependentUpon>PregledLoyaltyKarticaFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PregledLoyaltyOpcijeFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PregledLoyaltyOpcijeFrm.Designer.cs">
+      <DependentUpon>PregledLoyaltyOpcijeFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PregledRacuna.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PregledRacuna.Designer.cs">
+      <DependentUpon>PregledRacuna.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Prijava.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Prijava.Designer.cs">
+      <DependentUpon>Prijava.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RegistracijaFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RegistracijaFrm.Designer.cs">
+      <DependentUpon>RegistracijaFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StanjeZalihaFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StanjeZalihaFrm.Designer.cs">
+      <DependentUpon>StanjeZalihaFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UnosDobavljaca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UnosDobavljaca.Designer.cs">
+      <DependentUpon>UnosDobavljaca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UnosLijeka.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UnosLijeka.Designer.cs">
+      <DependentUpon>UnosLijeka.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UnosZaposlenika.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UnosZaposlenika.Designer.cs">
+      <DependentUpon>UnosZaposlenika.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dodatne klase\Apoteka.code.cs" />
+    <Compile Include="Dodatne klase\Lijek.code.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\AzuriranjeDobavljaca.resx">
+      <DependentUpon>AzuriranjeDobavljaca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AzuriranjeLijekova.resx">
+      <DependentUpon>AzuriranjeLijekova.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AzuriranjePodataka.resx">
+      <DependentUpon>AzuriranjePodataka.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AzuriranjeZaposlenika.resx">
+      <DependentUpon>AzuriranjeZaposlenika.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AzuriranjeBrisanjeLoyaltyKarticeFrm.resx">
+      <DependentUpon>AzuriranjeBrisanjeLoyaltyKarticeFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AzuriranjeBrisanjeLoyaltyOpcijeFrm.resx">
+      <DependentUpon>AzuriranjeBrisanjeLoyaltyOpcijeFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BrisanjeDobavljaca.resx">
+      <DependentUpon>BrisanjeDobavljaca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BrisanjeLijekova.resx">
+      <DependentUpon>BrisanjeLijekova.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BrisanjeZaposlenika.resx">
+      <DependentUpon>BrisanjeZaposlenika.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IzradaPrimke.resx">
+      <DependentUpon>IzradaPrimke.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MailSettings.resx">
+      <DependentUpon>MailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PregledDobavljaca.resx">
+      <DependentUpon>PregledDobavljaca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IzdavanjeRacuna.resx">
+      <DependentUpon>IzdavanjeRacuna.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IzradaLoyaltyKartice.resx">
+      <DependentUpon>IzradaLoyaltyKartice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IzradaLoyaltyOpcije.resx">
+      <DependentUpon>IzradaLoyaltyOpcije.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\KreiranjeApoteke.resx">
+      <DependentUpon>KreiranjeApoteke.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainAdministratorFrm.resx">
+      <DependentUpon>MainAdministratorFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainKorisnikFrm.resx">
+      <DependentUpon>MainKorisnikFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainZaposlenikFrm.resx">
+      <DependentUpon>MainZaposlenikFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NarucivanjeLijekova.resx">
+      <DependentUpon>NarucivanjeLijekova.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PregledIzvjesca.resx">
+      <DependentUpon>PregledIzvjesca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PregledKorisnika.resx">
+      <DependentUpon>PregledKorisnika.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PregledLoyaltyKarticaFrm.resx">
+      <DependentUpon>PregledLoyaltyKarticaFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PregledLoyaltyOpcijeFrm.resx">
+      <DependentUpon>PregledLoyaltyOpcijeFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PregledRacuna.resx">
+      <DependentUpon>PregledRacuna.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Prijava.resx">
+      <DependentUpon>Prijava.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RegistracijaFrm.resx">
+      <DependentUpon>RegistracijaFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StanjeZalihaFrm.resx">
+      <DependentUpon>StanjeZalihaFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UnosDobavljaca.resx">
+      <DependentUpon>UnosDobavljaca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UnosLijeka.resx">
+      <DependentUpon>UnosLijeka.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UnosZaposlenika.resx">
+      <DependentUpon>UnosZaposlenika.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EntityDeploy Include="Entity Framework\Database.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Database.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="App.Config" />
+    <None Include="Entity Framework\Database.edmx.diagram">
+      <DependentUpon>Database.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Entity Framework\Database.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Database.edmx</DependentUpon>
+      <LastGenOutput>Database.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Entity Framework\Database.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Database.edmx</DependentUpon>
+      <LastGenOutput>Database.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MailLib\MailLib.csproj">
+      <Project>{5efa7877-b3f2-4d3e-ab6f-43ebd18c7125}</Project>
+      <Name>MailLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
